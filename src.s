@@ -6,7 +6,7 @@ brk_original: .quad 0;
 .section .text
 
 # void setup_brk(); //Obtém o endereço de brk
-_setup_brk:
+setup_brk:
     movq $0, %rdi
     movq $12, %rax
     syscall
@@ -17,7 +17,7 @@ _setup_brk:
     ret
 
 # void dismiss_brk(); //Restaura o endereço de brk
-_dismiss_brk:
+dismiss_brk:
     movq brk_original, %rdi
     movq $12, %rax
     syscall
@@ -34,5 +34,5 @@ _dismiss_brk:
     //3. Se não encontrar, abre espaço para um novo bloco
 
 # int memory_free(void *pointer); //Marca um bloco ocupado como livre
-_memory_free:
+memory_free:
     movb $0, (%rdi)
